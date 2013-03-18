@@ -410,6 +410,12 @@ Tags::fetchGenre( const CodeItemMap& cim, uint16_t& cpp, const uint16_t*& c )
     if( f == cim.end() )
         return;
 
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
+
     MP4ItmfData& data = f->second->dataList.elements[0];
 
     cpp = (uint16_t(data.value[0]) <<  8)
@@ -430,6 +436,12 @@ Tags::fetchDisk( const CodeItemMap& cim, MP4TagDisk& cpp, const MP4TagDisk*& c )
     CodeItemMap::const_iterator f = cim.find( CODE_DISK );
     if( f == cim.end() )
         return;
+
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
@@ -455,6 +467,12 @@ Tags::fetchTrack( const CodeItemMap& cim, MP4TagTrack& cpp, const MP4TagTrack*& 
     if( f == cim.end() )
         return;
 
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
+
     MP4ItmfData& data = f->second->dataList.elements[0];
 
     cpp.index = (uint16_t(data.value[2]) <<  8)
@@ -478,6 +496,12 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint8_t& cpp, co
     if( f == cim.end() )
         return;
 
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
+
     MP4ItmfData& data = f->second->dataList.elements[0];
     cpp = data.value[0];
     c = &cpp;
@@ -494,6 +518,12 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint16_t& cpp, c
     CodeItemMap::const_iterator f = cim.find( code );
     if( f == cim.end() )
         return;
+
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
@@ -514,6 +544,12 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint32_t& cpp, c
     CodeItemMap::const_iterator f = cim.find( code );
     if( f == cim.end() )
         return;
+
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
@@ -536,6 +572,12 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint64_t& cpp, c
     CodeItemMap::const_iterator f = cim.find( code );
     if( f == cim.end() )
         return;
+
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
@@ -562,6 +604,12 @@ Tags::fetchString( const CodeItemMap& cim, const string& code, string& cpp, cons
     CodeItemMap::const_iterator f = cim.find( code );
     if( f == cim.end() )
         return;
+
+    // Documented in include/mp4v2/itmf_generic.h to always be at least one, but not actually true
+    // for all files in the field.
+    if ( f->second->dataList.elements == NULL || f->second->dataList.size < 1 ) {
+        return;
+    }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
     cpp.append( reinterpret_cast<char*>( data.value ), data.valueSize );
