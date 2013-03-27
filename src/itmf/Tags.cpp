@@ -9,9 +9,9 @@
 //  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
 //  License for the specific language governing rights and limitations
 //  under the License.
-// 
+//
 //  The Original Code is MP4v2.
-// 
+//
 //  The Initial Developer of the Original Code is Kona Blend.
 //  Portions created by Kona Blend are Copyright (C) 2008.
 //  All Rights Reserved.
@@ -113,7 +113,7 @@ Tags::c_fetch( MP4Tags*& tags, MP4FileHandle hFile )
     fetchString(  cim, CODE_LYRICS,            lyrics,            c.lyrics );
 
     fetchString(  cim, CODE_COPYRIGHT,         copyright,         c.copyright );
-    fetchString(  cim, CODE_ENCODINGTOOL,      encodingTool,      c.encodingTool ); 
+    fetchString(  cim, CODE_ENCODINGTOOL,      encodingTool,      c.encodingTool );
     fetchString(  cim, CODE_ENCODEDBY,         encodedBy,         c.encodedBy );
     fetchString(  cim, CODE_PURCHASEDATE,      purchaseDate,      c.purchaseDate );
 
@@ -165,7 +165,7 @@ Tags::c_free( MP4Tags*& tags )
 ///////////////////////////////////////////////////////////////////////////////
 
 void
-Tags::c_removeArtwork( MP4Tags*& tags, uint32_t index ) 
+Tags::c_removeArtwork( MP4Tags*& tags, uint32_t index )
 {
     if( !(index < artwork.size()) )
         return;
@@ -331,7 +331,7 @@ Tags::c_store( MP4Tags*& tags, MP4FileHandle hFile )
 {
     MP4Tags& c = *tags;
     MP4File& file = *static_cast<MP4File*>(hFile);
-   
+
     storeString(  file, CODE_NAME,              name,              c.name );
     storeString(  file, CODE_ARTIST,            artist,            c.artist );
     storeString(  file, CODE_ALBUMARTIST,       albumArtist,       c.albumArtist );
@@ -348,13 +348,13 @@ Tags::c_store( MP4Tags*& tags, MP4FileHandle hFile )
     storeDisk(    file,                         disk,              c.disk );
     storeInteger( file, CODE_TEMPO,             tempo,             c.tempo );
     storeInteger( file, CODE_COMPILATION,       compilation,       c.compilation );
-    
+
     storeString(  file, CODE_TVSHOW,            tvShow,            c.tvShow );
     storeString(  file, CODE_TVNETWORK,         tvNetwork,         c.tvNetwork );
     storeString(  file, CODE_TVEPISODEID,       tvEpisodeID,       c.tvEpisodeID );
     storeInteger( file, CODE_TVSEASON,          tvSeason,          c.tvSeason );
     storeInteger( file, CODE_TVEPISODE,         tvEpisode,         c.tvEpisode );
-    
+
     storeString(  file, CODE_SORTNAME,          sortName,          c.sortName );
     storeString(  file, CODE_SORTARTIST,        sortArtist,        c.sortArtist );
     storeString(  file, CODE_SORTALBUMARTIST,   sortAlbumArtist,   c.sortAlbumArtist );
@@ -418,6 +418,10 @@ Tags::fetchGenre( const CodeItemMap& cim, uint16_t& cpp, const uint16_t*& c )
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
+    if ( data.value == NULL ) {
+        return;
+    }
+
     cpp = (uint16_t(data.value[0]) <<  8)
         | (uint16_t(data.value[1])      );
 
@@ -428,7 +432,7 @@ Tags::fetchGenre( const CodeItemMap& cim, uint16_t& cpp, const uint16_t*& c )
 
 void
 Tags::fetchDisk( const CodeItemMap& cim, MP4TagDisk& cpp, const MP4TagDisk*& c )
-{    
+{
     cpp.index = 0;
     cpp.total = 0;
     c = NULL;
@@ -445,6 +449,10 @@ Tags::fetchDisk( const CodeItemMap& cim, MP4TagDisk& cpp, const MP4TagDisk*& c )
 
     MP4ItmfData& data = f->second->dataList.elements[0];
 
+    if ( data.value == NULL ) {
+        return;
+    }
+
     cpp.index = (uint16_t(data.value[2]) <<  8)
               | (uint16_t(data.value[3])      );
 
@@ -458,7 +466,7 @@ Tags::fetchDisk( const CodeItemMap& cim, MP4TagDisk& cpp, const MP4TagDisk*& c )
 
 void
 Tags::fetchTrack( const CodeItemMap& cim, MP4TagTrack& cpp, const MP4TagTrack*& c )
-{    
+{
     cpp.index = 0;
     cpp.total = 0;
     c = NULL;
@@ -474,6 +482,10 @@ Tags::fetchTrack( const CodeItemMap& cim, MP4TagTrack& cpp, const MP4TagTrack*& 
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
 
     cpp.index = (uint16_t(data.value[2]) <<  8)
               | (uint16_t(data.value[3])      );
@@ -503,6 +515,11 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint8_t& cpp, co
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
+
     cpp = data.value[0];
     c = &cpp;
 }
@@ -526,6 +543,10 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint16_t& cpp, c
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
 
     cpp = (uint16_t(data.value[0]) <<  8)
         | (uint16_t(data.value[1])      );
@@ -552,6 +573,10 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint32_t& cpp, c
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
 
     cpp = (uint32_t(data.value[0]) << 24)
         | (uint32_t(data.value[1]) << 16)
@@ -580,6 +605,10 @@ Tags::fetchInteger( const CodeItemMap& cim, const string& code, uint64_t& cpp, c
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
 
     cpp = (uint64_t(data.value[0]) << 56)
         | (uint64_t(data.value[1]) << 48)
@@ -612,6 +641,11 @@ Tags::fetchString( const CodeItemMap& cim, const string& code, string& cpp, cons
     }
 
     MP4ItmfData& data = f->second->dataList.elements[0];
+
+    if ( data.value == NULL ) {
+        return;
+    }
+
     cpp.append( reinterpret_cast<char*>( data.value ), data.valueSize );
     c = cpp.c_str();
 }
