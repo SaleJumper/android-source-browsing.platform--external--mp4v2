@@ -85,7 +85,6 @@ public:
     static const string CODE_ATID;
     static const string CODE_PLID;
     static const string CODE_GEID;
-    static const string CODE_XID;
 
 public:
     string      name;
@@ -143,7 +142,6 @@ public:
     uint32_t atID;
     uint64_t plID;
     uint32_t geID;
-    string   xid;
 
 public:
     Tags();

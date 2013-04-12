@@ -50,13 +50,12 @@ using namespace mp4v2::util;
 #define OPT_TVSHOW       'S'
 #define OPT_TRACK        't'
 #define OPT_TRACKS       'T'
-#define OPT_XID          'x'
 #define OPT_COMPOSER     'w'
 #define OPT_RELEASEDATE  'y'
 #define OPT_REMOVE       'r'
 #define OPT_ALBUM_ARTIST 'R'
 
-#define OPT_STRING  "A:a:b:c:C:d:D:e:E:g:G:H:i:I:l:L:m:M:n:N:o:P:s:S:t:T:x:w:y:r:R:"
+#define OPT_STRING  "A:a:b:c:C:d:D:e:E:g:G:H:i:I:l:L:m:M:n:N:o:P:s:S:t:T:w:y:r:R:"
 
 #define ELEMENT_OF(x,i) x[int(i)]
 
@@ -92,7 +91,6 @@ static const char* const help_text =
     "  -S  -show        STR  Set the TV show\n"
     "  -t, -track       NUM  Set the track number\n"
     "  -T, -tracks      NUM  Set the number of tracks\n"
-    "  -x, -xid         STR  Set the globally-unique xid (vendor:scheme:id)\n"
     "  -w, -writer      STR  Set the composer information\n"
     "  -y, -year        NUM  Set the release date\n"
     "  -R, -albumartist STR  Set the album artist\n"
@@ -131,7 +129,6 @@ extern "C" int
         { "tempo",       prog::Option::REQUIRED_ARG, 0, OPT_TEMPO        },
         { "track",       prog::Option::REQUIRED_ARG, 0, OPT_TRACK        },
         { "tracks",      prog::Option::REQUIRED_ARG, 0, OPT_TRACKS       },
-        { "xid",         prog::Option::REQUIRED_ARG, 0, OPT_XID          },
         { "writer",      prog::Option::REQUIRED_ARG, 0, OPT_COMPOSER     },
         { "year",        prog::Option::REQUIRED_ARG, 0, OPT_RELEASEDATE  },
         { "remove",      prog::Option::REQUIRED_ARG, 0, OPT_REMOVE       },
@@ -299,9 +296,6 @@ extern "C" int
                         break;
                     case OPT_TVSHOW:
                         MP4TagsSetTVShow( mdata, NULL );
-                        break;
-                    case OPT_XID:
-                        MP4TagsSetXID( mdata, NULL );
                         break;
                     case OPT_COMPOSER:
                         MP4TagsSetComposer( mdata, NULL );
@@ -487,9 +481,6 @@ extern "C" int
                             fprintf( stderr, "Art file %s not found\n", tags[i] );
                         }
                     }
-                    case OPT_XID:
-                        MP4TagsSetXID( mdata, tags[i] );
-                        break;
                 }
             }
         }

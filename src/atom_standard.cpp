@@ -184,8 +184,7 @@ MP4StandardAtom::MP4StandardAtom (const char *type) : MP4Atom(type)
         ExpectChildAtom("catg", Optional, OnlyOne); /* Category (for podcasts?) */
         ExpectChildAtom("purl", Optional, OnlyOne); /* Podcast URL */
         ExpectChildAtom("egid", Optional, OnlyOne); /* Podcast episode global unique ID */
-        ExpectChildAtom("cprt", Optional, OnlyOne); /* Copyright */
-        ExpectChildAtom("xid ", Optional, OnlyOne); /* XID */
+        
     }  else if (ATOMID(type) == ATOMID("imif")) {
         AddVersionAndFlags();
         AddProperty(new MP4DescriptorProperty("ipmp_desc", MP4IPMPDescrTag,

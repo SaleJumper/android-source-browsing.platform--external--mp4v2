@@ -56,7 +56,7 @@ typedef struct MP4Tags_s
 
     const char*        name;
     const char*        artist;
-    const char*        albumArtist;
+    const char*        albumArtist; 
     const char*        album;
     const char*        grouping;
     const char*        composer;
@@ -96,7 +96,7 @@ typedef struct MP4Tags_s
 
     const uint8_t* podcast;
     const char*    keywords;  /* TODO: Needs testing */
-    const char*    category;
+    const char*    category;    
 
     const uint8_t* hdVideo;
     const uint8_t* mediaType;
@@ -110,7 +110,6 @@ typedef struct MP4Tags_s
     const uint32_t* atID;
     const uint64_t* plID;
     const uint32_t* geID;
-    const char*     xid;
 } MP4Tags;
 
 /** Allocate tags convenience structure for reading and settings tags.
@@ -214,7 +213,6 @@ MP4V2_EXPORT void MP4TagsSetCNID              ( const MP4Tags*, const uint32_t* 
 MP4V2_EXPORT void MP4TagsSetATID              ( const MP4Tags*, const uint32_t* );
 MP4V2_EXPORT void MP4TagsSetPLID              ( const MP4Tags*, const uint64_t* );
 MP4V2_EXPORT void MP4TagsSetGEID              ( const MP4Tags*, const uint32_t* );
-MP4V2_EXPORT void MP4TagsSetXID               ( const MP4Tags*, const char* );
 
 /** @} ***********************************************************************/
 

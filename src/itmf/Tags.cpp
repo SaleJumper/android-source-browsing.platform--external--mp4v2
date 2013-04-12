@@ -134,7 +134,6 @@ Tags::c_fetch( MP4Tags*& tags, MP4FileHandle hFile )
     fetchInteger( cim, CODE_ATID,              atID,              c.atID );
     fetchInteger( cim, CODE_PLID,              plID,              c.plID );
     fetchInteger( cim, CODE_GEID,              geID,              c.geID );
-    fetchString(  cim, CODE_XID,               xid,               c.xid );
 
     genericItemListFree( itemList ); // free
 
@@ -389,7 +388,6 @@ Tags::c_store( MP4Tags*& tags, MP4FileHandle hFile )
     storeInteger( file, CODE_ATID,              atID,              c.atID );
     storeInteger( file, CODE_PLID,              plID,              c.plID );
     storeInteger( file, CODE_GEID,              geID,              c.geID );
-    storeString(  file, CODE_XID,               xid,               c.xid );
 
     // destroy all cover-art then add each
     {
@@ -731,7 +729,7 @@ void
 Tags::storeTrack( MP4File& file, const MP4TagTrack& cpp, const MP4TagTrack* c )
 {
     if( c ) {
-        uint8_t buf[8]; // iTMF spec says 7 but iTunes media is 8
+        uint8_t buf[7];
         memset( buf, 0, sizeof(buf) );
 
         buf[2] = uint8_t((cpp.index & 0xff00) >> 8);
@@ -937,7 +935,6 @@ const string Tags::CODE_CNID              = "cnID";
 const string Tags::CODE_ATID              = "atID";
 const string Tags::CODE_PLID              = "plID";
 const string Tags::CODE_GEID              = "geID";
-const string Tags::CODE_XID               = "xid ";
 
 ///////////////////////////////////////////////////////////////////////////////
 
