@@ -1296,6 +1296,14 @@ MP4TagsSetGEID( const MP4Tags* m, const uint32_t* value )
     cpp.c_setInteger( value, cpp.geID, c.geID );
 }
 
+void
+MP4TagsSetXID( const MP4Tags* m, const char* value )
+{
+    itmf::Tags& cpp = *static_cast<itmf::Tags*>(m->__handle);
+    MP4Tags& c = *const_cast<MP4Tags*>(m);
+    cpp.c_setString( value, cpp.xid, c.xid );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 MP4ItmfItem*

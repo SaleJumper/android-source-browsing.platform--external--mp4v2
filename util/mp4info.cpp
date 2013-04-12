@@ -207,6 +207,9 @@ extern "C" int main( int argc, char** argv )
             if ( tags->cnID ) {
                 fprintf( stdout, " cnID: %u\n", *tags->cnID );
             }
+            if ( tags->xid ) {
+                fprintf( stdout, " xid: %s\n", tags->xid );
+            }
             if ( tags->iTunesAccount ) {
                 fprintf( stdout, " iTunes Account: %s\n", tags->iTunesAccount );
             }
